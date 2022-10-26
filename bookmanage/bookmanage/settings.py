@@ -14,6 +14,15 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print('~~~~~~~~~写法重新python manage.py runserver，运行settings.py文件是没用的~~~~~~~~~~~~~')
+print(__file__) #查看当前文件的绝对路径
+# D:\Study2\django-base\bookmanage\bookmanage\settings.py
+print(os.path.abspath(__file__)) #查看当前文件的绝对路径
+# D:\Study2\django-base\bookmanage\bookmanage\settings.py
+print(os.path.dirname(os.path.abspath(__file__)) ) #查看当前文件绝对路径的上一级文件名称路径
+#D:\Study2\django-base\bookmanage\bookmanage
+print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))#查看当前文件绝对路径的文件名称路径的上一级文件路径
+#D:\Study2\django-base\bookmanage
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,8 +33,9 @@ SECRET_KEY = '#k%p_ckn0ksprbj=x#!9etpijj#kyuk_t)fm$nq$me(c0x^hs%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+#默认启动django的服务地址是：127.0.0.1:8000
+#“*”可以使所有的网址都能访问Django项目了，不建议不要使用*通配符去配置，另外当DEBUG设置为False的时候必须配置这个配置，否则会抛出异常。
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,7 +65,7 @@ ROOT_URLCONF = 'bookmanage.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,5 +127,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+#访问静态文件的路由
+# STATIC_URL = '/static/'
 STATIC_URL = '/static/'
+#告诉系统静态文件的路径放在那里了
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
